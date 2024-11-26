@@ -1,0 +1,45 @@
+// map syntax 
+// array.map((element, index, array) => {
+//   // return transformed element
+// });
+
+// ----filter syntax---
+
+// array.filter((element, index, array) => {
+//   // return true to keep the element, false to discard it
+// });
+
+//--reduce syntax ---
+
+// array.reduce((accumulator, element, index, array) => {
+//   // return new accumulator value
+// }, initialValue);
+
+export default function MapandFilter() {
+  const products = [
+    {id: 1, name: "Laptop", category: "Electronics", price: 1000, stock: 5 },
+    { id: 2, name: "Phone", category: "Electronics", price: 500, stock: 0 },
+    { id: 3, name: "Keyboard", category: "Accessories", price: 100, stock: 10 },
+    { id: 4, name: "Mouse", category: "Accessories", price: 50, stock: 15 },
+    { id: 5, name: "Monitor", category: "Electronics", price: 200, stock: 3 },
+  ];
+  
+  // Step 1: Filter out products that are out of stock
+  const inStockProducts = products.filter((product) => product.stock > 0);
+  
+  // Step 2: Map to include discounted prices (10% off)
+  const discountedProducts = inStockProducts.map((product) => ({
+    ...product,
+    discountedPrice: product.price * 0.9,
+  }));
+  
+  // Step 3: Calculate the total value of discounted products in stock
+  const totalStockValue = discountedProducts.reduce(
+    (total, product) => total + product.discountedPrice * product.stock,
+    0
+  );
+  
+  // Print the results
+  console.log("In-Stock Products with Discounted Prices:", discountedProducts);
+  console.log("Total Stock Value:", totalStockValue);
+  
